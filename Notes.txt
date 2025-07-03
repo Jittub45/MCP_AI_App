@@ -1,0 +1,91 @@
+
+
+ MCP – Model Context Protocol
+
+ What is MCP?
+
+MCP is an open protocol that standardizes how AI applications connect to and interact with external tools and data sources.
+
+Just like:
+    REST APIs  standardize communication between frontend and backend
+    LSP (Language Server Protocol) standardizes how IDEs interact with programming tools
+        -MCP standardizes how AI applications interact with external systems
+
+
+
+Key Principles
+
+1. Standardization
+   Enables seamless and consistent integration between AI models and tools/data.
+
+2. Context Matters
+   AI models are only as powerful as the **context** they are given. MCP makes context access structured, reliable, and scalable.
+
+3. Open Ecosystes
+   Anyone can build or adopt MCP servers and clients, enabling interoperability.
+
+
+Who is MCP for?
+
+| Role              | Benefit                                                                  |
+| ----------------- | ------------------------------------------------------------------------ |
+| AI App Developers | Connect your AI app to any MCP server with no additional integration     |
+| API Developers    | Build a single MCP server usable by any MCP-compatible app               |
+| Enterprises       | Enforce a clean separation of concerns between product and tooling       |
+| AI Applications   | Gain enhanced capabilities from structured and real-time context         |
+
+
+How MCP Works
+
+MCP defines two core components:
+
+1. MCP Client
+
+* Invokes tools
+* Queries resources
+* Interpolates prompts
+* Exposes tools and templates to the AI model
+
+2. MCP Server
+
+* Exposes tools to be invoked
+* Exposes resources (data sources, APIs, etc.)
+* Exposes prompt templates that clients can interpolate
+
+They communicate bidirectionally:
+
+[ MCP Client ] <-----> [ MCP Server ]
+     |                          |
+     |---> call tools           |---> expose tools
+     |---> fetch data           |---> expose resources
+     |---> prompt templates     |---> expose prompt templates
+
+
+Components in Detail
+
+i. Tools
+
+* Define actions or capabilities the AI can call.
+* MCP provides SDKs to build tools in various languages.
+* The Python SDK makes tool declaration simple and intuitive.
+
+ii. Resources
+
+* Let servers expose data to clients (e.g., databases, APIs).
+* Comparable to **GET request handlers** in an HTTP server.
+* Can return:
+
+  * Strings
+  * JSON
+  * Binary data
+* Two types:
+
+  * Direct: Static or fixed responses
+  * Templated: Dynamic, parameterized responses
+
+iii. Prompt Templates
+
+* Define reusable system/user/assistant message patterns.
+* Used by clients to generate high-quality and consistent outputs.
+* Should be thoroughly tested and optimized.
+
